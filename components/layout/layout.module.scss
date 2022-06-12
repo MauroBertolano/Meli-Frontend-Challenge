@@ -1,0 +1,11 @@
+.container {
+  width: 60%;
+  height: fit-content;
+  padding-bottom: 32px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    min-width: 95%;
+  }
+}

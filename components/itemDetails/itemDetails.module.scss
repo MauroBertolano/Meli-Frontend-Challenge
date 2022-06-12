@@ -1,0 +1,65 @@
+@import "./../../styles/variables.module.scss";
+
+.item-details-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.item-details-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+}
+
+.item-details-condition {
+  margin-top: 32px;
+}
+
+.item-details-title {
+  margin: 0;
+  font-size: 24px;
+  width: 80%;
+}
+
+.item-details-price {
+  font-size: 46px;
+  margin: 32px 0;
+}
+
+.item-description-title {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0 0 32px;
+}
+
+.item-description {
+  font-size: 16px;
+  margin: 0 0 32px;
+  font-weight: 300;
+}
+
+.item-details-buy-btn {
+  color: white;
+  background-color: $light-blue;
+  border: unset;
+  border-radius: 4px;
+  font-size: 20px;
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue;
+  }
+}
+
+.item-details-sold-out {
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .item-details-container {
+    flex-direction: column-reverse;
+    padding: 0 10px;
+  }
+}

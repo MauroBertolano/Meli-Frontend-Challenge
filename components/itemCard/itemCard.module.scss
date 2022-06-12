@@ -1,0 +1,54 @@
+.item-card {
+  display: flex;
+  padding: 16px 0px;
+}
+
+.item-card-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  width: 70%;
+}
+
+.item-card-img {
+  margin: 0 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.item-card-price {
+  font-size: 24px;
+  font-weight: bold;
+  width: 80%;
+  cursor: pointer;
+}
+
+.item-card-header {
+  display: flex;
+}
+
+.item-card-city {
+  vertical-align: center;
+  font-size: 12px;
+}
+
+.item-card-title {
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .item-card-title {
+    margin-top: 16px;
+  }
+
+  .item-card {
+    padding: 12px 0px;
+  }
+
+  .item-card-header {
+    flex-direction: column;
+  }
+}

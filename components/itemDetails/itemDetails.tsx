@@ -52,6 +52,8 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item }) => {
               : ""
           }`}
           role="button"
+          aria-label="Comprar"
+          disabled={item.availableQuantity === 0}
         >
           {item.availableQuantity > 0
             ? "Comprar"

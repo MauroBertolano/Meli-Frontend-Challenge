@@ -35,6 +35,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const { data: itemResponse } = await ApiService.get(`/items/${id}`);
+
+  if ("error" in itemResponse) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   const { data: itemDescriptionResponse } = await ApiService.get(
     `/items/${id}/description`
   );
@@ -53,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     condition:
       itemResponse.attributes.find(
         (attribute: any) => attribute.id === "ITEM_CONDITION"
-      ).value_name ?? itemResponse.condition,
+      )?.value_name ?? itemResponse.condition,
     freeShipping: itemResponse.shipping.free_shipping,
     soldQuantity: itemResponse.sold_quantity,
     availableQuantity: itemResponse.available_quantity,

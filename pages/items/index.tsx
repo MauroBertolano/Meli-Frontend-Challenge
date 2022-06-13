@@ -2,22 +2,9 @@ import { GetServerSideProps } from "next";
 import ItemCard from "../../components/itemCard/itemCard";
 import ItemsLayout from "../../components/itemsLayout/itemsLayout";
 import Breadcrumb from "../../components/shared/breadcrumb/breadcrumb";
+import { ItemResponse, ItemsResponse } from "../../interfaces/ApiResponse";
+import { Item } from "../../interfaces/Item";
 import ApiService from "../../services/ApiService";
-
-export interface Price {
-  currency: String;
-  amount: number;
-}
-
-export interface Item {
-  id: string;
-  title: string;
-  price: Price;
-  picture: string;
-  condition: string;
-  freeShipping: boolean;
-  address: string;
-}
 
 interface ItemsProps {
   items: Item[];
@@ -50,10 +37,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const { data } = await ApiService.get(`sites/MLA/search?q=${search}&limit=4`);
+  const { data } = await ApiService.get<ItemsResponse>(
+    `sites/MLA/search?q=${search}&limit=4`
+  );
 
   const items = data.results.map(
-    (item: any): Item => ({
+    (item: ItemResponse): Item => ({
       id: item.id,
       title: item.title,
       price: {
@@ -67,14 +56,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     })
   );
 
-  const category = data.filters.find(
-    (filters: any) => filters.id === "category"
-  );
+  const category = data.filters.find((filters) => filters.id === "category");
 
-  let categories = [];
+  let categories: string[] = [];
   if (category)
-    categories = category.values[0]["path_from_root"].map(
-      (category: any) => category.name
+    categories = category.values[0].path_from_root.map(
+      (category) => category.name
     );
 
   const author = { name: "Mauro", lastName: "Bertolano" };

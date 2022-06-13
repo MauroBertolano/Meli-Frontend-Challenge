@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { Item } from "../../pages/items";
 import styles from "./itemCard.module.scss";
 import freeShippingIcon from "../../public/ic_shipping.png";
 import { useRouter } from "next/router";
+import { Item } from "../../interfaces/Item";
 
-interface ItemCard {
+interface ItemCardProps {
   item: Item;
 }
 
-const ItemCard: React.FC<ItemCard> = ({ item }) => {
+const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
   const router = useRouter();
 
   const redirectToItem = () => {

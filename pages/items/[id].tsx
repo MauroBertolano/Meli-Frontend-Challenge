@@ -1,9 +1,9 @@
 import { GetServerSideProps } from "next";
-import Image from "next/image";
-import Items, { Price } from ".";
 import ItemDetails from "../../components/itemDetails/itemDetails";
 import ItemsLayout from "../../components/itemsLayout/itemsLayout";
 import Breadcrumb from "../../components/shared/breadcrumb/breadcrumb";
+import { CategoriesResponse, ItemResponse } from "../../interfaces/ApiResponse";
+import { Item } from "../../interfaces/Item";
 import ApiService from "../../services/ApiService";
 
 interface ItemDetailsProps {
@@ -34,7 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const { data: itemResponse } = await ApiService.get(`/items/${id}`);
+  const { data: itemResponse } = await ApiService.get<ItemResponse>(
+    `/items/${id}`
+  );
 
   if ("error" in itemResponse) {
     return {
@@ -47,11 +49,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { data: itemDescriptionResponse } = await ApiService.get(
     `/items/${id}/description`
   );
-  const { data: itemCategories } = await ApiService.get(
+  const { data: itemCategories } = await ApiService.get<CategoriesResponse>(
     `/categories/${itemResponse.category_id}`
   );
 
-  const item = {
+  const item: Item = {
     id: itemResponse.id,
     title: itemResponse.title,
     price: {
@@ -61,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     picture: itemResponse.thumbnail,
     condition:
       itemResponse.attributes.find(
-        (attribute: any) => attribute.id === "ITEM_CONDITION"
+        (attribute) => attribute.id === "ITEM_CONDITION"
       )?.value_name ?? itemResponse.condition,
     freeShipping: itemResponse.shipping.free_shipping,
     soldQuantity: itemResponse.sold_quantity,
@@ -69,11 +71,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     description: itemDescriptionResponse.plain_text,
   };
 
-  let categories = [];
+  let categories: string[] = [];
   if (itemCategories)
-    categories = itemCategories["path_from_root"].map(
-      (category: any) => category.name
-    );
+    categories = itemCategories.path_from_root.map((category) => category.name);
 
   const author = { name: "Mauro", lastName: "Bertolano" };
 

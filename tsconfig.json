@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "components/itemsLayout",
-    "__tests__/navbar.test.jsx"
+    "__tests__/navbar.test.jsx",
+    "e2e/navigation.spec.js"
   ],
   "exclude": ["node_modules"]
 }

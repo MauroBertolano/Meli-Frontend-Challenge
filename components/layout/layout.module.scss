@@ -4,6 +4,18 @@
   padding-bottom: 32px;
 }
 
+@media screen and (max-width: 1600px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 90%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .container {
     min-width: 95%;

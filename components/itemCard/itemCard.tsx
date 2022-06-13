@@ -29,7 +29,7 @@ const ItemCard: React.FC<ItemCard> = ({ item }) => {
       </div>
       <div className={styles["item-card-details"]}>
         <div className={styles["item-card-header"]}>
-          <span className={styles["item-card-price"]}>
+          <span className={styles["item-card-price"]} onClick={redirectToItem}>
             $ {item.price.amount}{" "}
             {item.freeShipping && (
               <Image
@@ -41,7 +41,9 @@ const ItemCard: React.FC<ItemCard> = ({ item }) => {
           </span>
           <span className={styles["item-card-city"]}>{item.address}</span>
         </div>
-        <h2 className={styles["item-card-title"]}>{item.title}</h2>
+        <h2 className={styles["item-card-title"]} onClick={redirectToItem}>
+          {item.title}
+        </h2>
       </div>
     </div>
   );

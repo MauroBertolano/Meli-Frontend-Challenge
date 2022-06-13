@@ -1,34 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mercado Libre challenge front end
 
 ## Getting Started
 
-First, run the development server:
+First, we need to install dependencies:
 
 ```bash
-npm run dev
-# or
+yarn install
+```
+
+To run development server:
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Unit tests
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Test are using Jest and React Testing Library.
+If you want to run the unit tests:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+yarn test
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+If you want to see tests coverage
 
-## Learn More
+```bash
+yarn test -- --coverage
+```
 
-To learn more about Next.js, take a look at the following resources:
+You should see something like this:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+------------------------------|---------|----------|---------|---------|-------------------
+File                          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+------------------------------|---------|----------|---------|---------|-------------------
+All files                     |     100 |      100 |     100 |     100 |
+ components/itemCard          |     100 |      100 |     100 |     100 |
+  itemCard.tsx                |     100 |      100 |     100 |     100 |
+ components/itemDetails       |     100 |      100 |     100 |     100 |
+  itemDetails.tsx             |     100 |      100 |     100 |     100 |
+ components/itemsLayout       |     100 |      100 |     100 |     100 |
+  itemsLayout.tsx             |     100 |      100 |     100 |     100 |
+ components/navbar            |     100 |      100 |     100 |     100 |
+  navbar.tsx                  |     100 |      100 |     100 |     100 |
+ components/shared/breadcrumb |     100 |      100 |     100 |     100 |
+  breadcrumb.tsx              |     100 |      100 |     100 |     100 |
+ components/shared/searchBar  |     100 |      100 |     100 |     100 |
+  searchBar.tsx               |     100 |      100 |     100 |     100 |
+ pages/items                  |     100 |      100 |     100 |     100 |
+  [id].tsx                    |     100 |      100 |     100 |     100 |
+  index.tsx                   |     100 |      100 |     100 |     100 |
+------------------------------|---------|----------|---------|---------|-------------------
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## E2E tests
 
-## Deploy on Vercel
+Currently using Playwright for e2e tests. They are running in three browsers: Chrome, Firefox, Safari. You may need to install supported browsers first.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx playwright install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you want to run the tests first you need to have the app running and from another console run:
+
+```bash
+yarn test:e2e
+```
